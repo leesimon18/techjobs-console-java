@@ -1,8 +1,6 @@
 package org.launchcode.techjobs.console;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -60,10 +58,21 @@ public class TechJobs {
                 System.out.println("\nSearch term: ");
                 String searchTerm = in.nextLine();
 
-                if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+                System.out.println("\n");
+
+//                System.out.println("searchField: "+searchField);
+//                System.out.println("searchTerm: "+searchTerm);
+
+
+//                printJobs(JobData.searchByColumnsAndValue(searchField, searchTerm));
+
+                if (searchField.equals("all") && searchTerm.equals("")) {
+                    printJobs(JobData.findAll());
+//                    System.out.println("Search all fields not yet implemented.");
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
+//                    printJobs(JobData.searchByColumnsAndValue(searchField, searchTerm));
+
                 }
             }
         }
@@ -110,7 +119,33 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+        if (someJobs.size() == 0) {
+            System.out.println("No Results");
+        } else {
+            for (int i = 0; i < someJobs.size(); i++) {
+                System.out.println("*****");
+                for (Map.Entry<String, String> entry : someJobs.get(i).entrySet()) {
+                    String key = entry.getKey();
+                    Object value = entry.getValue();
 
-        System.out.println("printJobs is not implemented yet");
+                    System.out.println(key + ": " + value);
+                }
+                System.out.println("*****\n");
+            }
+        }
+//        -------------------
+//        for(int i = 0; i <someJobs.size(); i++) {
+//            String job = "";
+//            for (Map.Entry<String, String> entry : someJobs.get(i).entrySet()) {
+//                Object value = entry.getValue();
+//                job = job + " " + value;
+//            }
+//            if (job.contains("Ruby")) {
+//                System.out.println(job);
+//                System.out.println("*****\n");
+//            }
+//
+//        }
+
     }
 }
